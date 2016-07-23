@@ -3,15 +3,16 @@ import React, { Component, PropTypes } from 'react'
 
 class List extends Component {
 
-	componentWillMount() {
+	componentDidMount() {
     this.props.fetchLeads()
   }
 
   renderPosts(leads) {
-    return leads.map((post) => {
+    return leads.map((lead) => {
       return (
         <li key={lead.id}>
             <h3>{lead.name}</h3>
+            <p>{lead.email} || {lead.phone} || {lead.no_of_hours} hours<button>Delete</button></p>
         </li>
       )
     })

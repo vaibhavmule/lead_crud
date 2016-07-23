@@ -8,16 +8,15 @@ export const FETCH_LEADS_FAILURE = 'FETCH_LEADS_FAILURE';
 
 const ROOT_URL = 'http://localhost:8000'
 
-export function fetchLeads() {
-  const request = axios({
-    method: 'get',
-    url: `${ROOT_URL}/leads`,
-    headers: []
-  })
+export function fetchLeadsFromServer() {
+  return axios
+    .get('http://localhost:8000/leads/')
+}
 
+export function fetchLeads(payload) {
   return {
     type: FETCH_LEADS,
-    payload: request
+    payload
   }
 }
 
