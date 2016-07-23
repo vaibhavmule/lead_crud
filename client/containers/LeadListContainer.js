@@ -1,7 +1,18 @@
 import axios from 'axios'
 
 import { connect } from 'react-redux'
-import { fetchLeads, fetchLeadsSuccess, fetchLeadsFailure, fetchLeadsFromServer } from '../actions';
+import {
+  // Fetch Leads
+  fetchLeads,
+  fetchLeadsSuccess,
+  fetchLeadsFailure,
+  fetchLeadsFromServer,
+  // Delete Leads
+  deleteLead,
+  deleteLeadSuccess,
+  deleteLeadFailure,
+  deleteLeadFromServer
+} from '../actions';
 
 import LeadsList from '../components/List';
 
@@ -28,6 +39,21 @@ const mapDispatchToProps = (dispatch) => {
           return err
         })))
 
+    },
+    deleteLead: (leadId) => {
+
+      dispatch(deleteLead(deleteLeadFromServer(leadId)
+        .then((res) => {
+
+          dispatch(fetchLeadSuccess(res))
+          return res
+        })
+        .catch((err) => {
+
+          dispatch(fetchLeadFailure(err))
+          return err
+        })
+      ))
     }
   }
 }

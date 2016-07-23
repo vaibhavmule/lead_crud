@@ -12,7 +12,7 @@ class List extends Component {
       return (
         <li key={lead.id}>
             <h3>{lead.name}</h3>
-            <p>{lead.email} || {lead.phone} || {lead.no_of_hours} hours<button>Delete</button></p>
+            <p>{lead.email} || {lead.phone} || {lead.no_of_hours} hours<button onClick={this.props.deleteLead.bind(lead.id)}>delete</button></p>
         </li>
       )
     })

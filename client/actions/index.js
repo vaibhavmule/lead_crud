@@ -1,12 +1,11 @@
 import axios from 'axios'
 
+const ROOT_URL = 'http://localhost:8000'
+
 // Leads list
 export const FETCH_LEADS = 'FETCH_LEADS';
 export const FETCH_LEADS_SUCCESS = 'FETCH_LEADS_SUCCESS';
 export const FETCH_LEADS_FAILURE = 'FETCH_LEADS_FAILURE';
-
-
-const ROOT_URL = 'http://localhost:8000'
 
 export function fetchLeadsFromServer() {
   return axios
@@ -33,3 +32,36 @@ export function fetchLeadsFailure(error) {
     payload: error
   }
 }
+
+
+// Delete List
+export const DELETE_LEAD = 'DELETE_LEAD';
+export const DELETE_LEAD_SUCCESS = 'DELETE_LEAD_SUCCESS';
+export const DELETE_LEAD_FAILURE = 'DELETE_LEAD_FAILURE';
+
+export function deleteLeadFromServer(leadId) {
+  return axios
+    .delete('http://localhost:8000/leads/' + leadId)
+}
+
+export function deleteLead(payload) {
+  return {
+    type: DELETE_LEAD,
+    payload
+  }
+}
+
+export function deleteLeadSuccess(lead) {
+  return {
+    type: DELETE_LEAD_SUCCESS,
+    payload: lead
+  }
+}
+
+export function deleteLeadFailure(error) {
+  return {
+    type: DELETE_LEAD_FAILURE,
+    payload: error
+  }
+}
+
