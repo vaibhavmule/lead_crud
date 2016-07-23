@@ -2,13 +2,12 @@ import { combineReducers } from 'redux'
 import {
   FETCH_LEADS,
   FETCH_LEADS_FAILURE,
-  FETCH_LEADS_SUCCESS,
-  RESET_LEADS
+  FETCH_LEADS_SUCCESS
 } from '../actions'
 
 // Initial state
 const INITIAL_STATE = {
-  leadList: {
+  leadsList: {
     leads: [],
     error: 'null',
     loading: false
@@ -17,32 +16,20 @@ const INITIAL_STATE = {
 
 // Leads reducers
 function leads(state = INITIAL_STATE, action) {
+  let error;
   switch (action.type) {
     case FETCH_LEADS:
-      return Object.assign({}, state, {
-        error: null,
-        loading: true
-      })
-    case FETCH_LEADS_FAILURE:
-      return Object.assign({}, state, {
-        error: action.error,
-      })
+      return {...state, leadsList: { leads: [], error: null, loading: true } }
     case FETCH_LEADS_SUCCESS:
-      return Object.assign({}, state, {
-        leads: action.leads,
-        error: null,
-        loading: false
-      })
-    case RESET_LEADS:
-      return Object.assign({}, state, {
-        leads: [],
-        error: null,
-        loading: false
-      })
+      return {...state, leadsList: { leads: action.payload.data, error: null, loading: false } }
+    case FETCH_LEADS_FAILURE:
+      error = action.payload.data || { message: action.payload.message };
+      return {...state, leadsList: { leads: [], error: error, loading: false } }
     default:
       return state
   }
 }
+
 
 // combine all reducers
 const rootReducer = combineReducers({

@@ -1,12 +1,14 @@
 import React, { Component, PropTypes } from 'react'
-import List from './../containers/'
+
+import Header from './Header'
+import List from './../containers/LeadListContainer'
 
 class App extends Component {
 
   render() {
     return (
-    	<div>
-      	<h1>Hello, world!</h1>
+      <div>
+      	<Header />
       	<List />
       </div>
    )

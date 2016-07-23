@@ -9,7 +9,6 @@ import createLogger from 'redux-logger'
 import rootReducer from './reducers'
 import App from './components/App'
 
-
 const loggerMiddleware = createLogger()
 
 const store = createStore(
@@ -27,3 +26,5 @@ render(
   </Provider>,
   document.getElementById('root')    
 )
+
+
