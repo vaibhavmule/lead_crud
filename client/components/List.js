@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-
+import { Link } from 'react-router'
 
 class List extends Component {
 
@@ -11,8 +11,10 @@ class List extends Component {
     return leads.map((lead) => {
       return (
         <li key={lead.id}>
-            <h3>{lead.name}</h3>
-            <p>{lead.email} || {lead.phone} || {lead.no_of_hours} hours<button onClick={this.props.deleteLead.bind(lead.id)}>delete</button></p>
+            <Link style={{color:'black'}} to={"leads/" + lead.id}>
+              <h3>{lead.name}</h3>
+            </Link>
+            <p>{lead.email} || {lead.phone} || {lead.no_of_hours} hours</p>
         </li>
       )
     })

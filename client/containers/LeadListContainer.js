@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 import { connect } from 'react-redux'
 import {
   // Fetch Leads
@@ -7,11 +5,6 @@ import {
   fetchLeadsSuccess,
   fetchLeadsFailure,
   fetchLeadsFromServer,
-  // Delete Leads
-  deleteLead,
-  deleteLeadSuccess,
-  deleteLeadFailure,
-  deleteLeadFromServer
 } from '../actions';
 
 import LeadsList from '../components/List';

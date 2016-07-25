@@ -65,3 +65,36 @@ export function deleteLeadFailure(error) {
   }
 }
 
+
+
+// get lead
+export const FETCH_LEAD = 'FETCH_LEAD';
+export const FETCH_LEAD_SUCCESS = 'FETCH_LEAD_SUCCESS';
+export const FETCH_LEAD_FAILURE = 'FETCH_LEAD_FAILURE';
+
+export function fetchLeadFromServer(leadId) {
+  console.log('leadId', leadId)
+  return axios
+    .get('http://localhost:8000/leads/' + leadId)
+}
+
+export function fetchLead(payload) {
+  return {
+    type: FETCH_LEAD,
+    payload
+  }
+}
+
+export function fetchLeadSuccess(leads) {
+  return {
+    type: FETCH_LEAD_SUCCESS,
+    payload: lead
+  }
+}
+
+export function fetchLeadsFailure(error) {
+  return {
+    type: FETCH_LEAD_FAILURE,
+    payload: error
+  }
+}
