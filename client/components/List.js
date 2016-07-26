@@ -10,12 +10,12 @@ class List extends Component {
   renderPosts(leads) {
     return leads.map((lead) => {
       return (
-        <li key={lead.id}>
-            <Link style={{color:'black'}} to={"leads/" + lead.id}>
+        <div key={lead.id}>
+            <Link to={"leads/" + lead.id}>
               <h3>{lead.name}</h3>
             </Link>
             <p>{lead.email} || {lead.phone} || {lead.no_of_hours} hours</p>
-        </li>
+        </div>
       )
     })
   }

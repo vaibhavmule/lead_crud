@@ -5,32 +5,54 @@ import {
   fetchLeadSuccess,
   fetchLeadFailure,
   fetchLeadFromServer,
+
+  // Fetch Lead
+  deleteLead,
+  deleteLeadSuccess,
+  deleteLeadFailure,
+  deleteLeadFromServer,
 } from '../actions'
 
 import LeadDetail from '../components/Detail';
 
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state, ownProps)
+
   return {
+    deleteLead: state.leads.deletedLead,
     activeLead: state.leads.activeLead,
     leadId: ownProps.id
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     fetchLead: (id) => {
 
       dispatch(fetchLead(fetchLeadFromServer(id)
         .then((res) => {
-          console.log('res', res)
+
           dispatch(fetchLeadSuccess(res))
           return res
         })
         .catch((err) => {
-          console.log('err', err)
+
           dispatch(fetchLeadFailure(err))
+          return err
+        })))
+
+    },
+    deleteLead: () => {
+
+      dispatch(deleteLead(deleteLeadFromServer(ownProps.id)
+        .then((res) => {
+
+          dispatch(deleteLeadSuccess(res))
+          return res
+        })
+        .catch((err) => {
+
+          dispatch(deleteLeadFailure(err))
           return err
         })))
 

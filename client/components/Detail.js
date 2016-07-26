@@ -2,12 +2,12 @@ import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 
 class Detail extends Component {
+
   static contextTypes = {
     router: PropTypes.object
   }
 
   componentDidMount() {
-  	console.log('this.props', this.props)
     this.props.fetchLead(this.props.leadId)
   }
 
@@ -15,16 +15,19 @@ class Detail extends Component {
     const { lead, loading, error } = this.props.activeLead
 
     if(loading) {
-      return <div><h2>Lead List</h2><h3>Loading...</h3></div>      
+      return <div><h2>Lead Detail</h2><h3>Loading...</h3></div>      
     } else if(error) {
-      return <div><h2>Lead List</h2>Error: {error.message}</div>
+      return <div><h2>Lead Detail</h2>Error: {error.message}</div>
     } else if(!lead) {
       return <span />
     }
 
     return (
       <div className="container">
+        <h2>Lead Detail</h2>
         <h3>{lead.name}</h3>
+        <p>{lead.email} || {lead.phone} || {lead.no_of_hours} hours</p>
+        <button onClick={()=> {this.props.onDeleteClick()}}>Delete</button>
       </div>
     )
   }

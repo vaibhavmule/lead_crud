@@ -41,7 +41,7 @@ export const DELETE_LEAD_FAILURE = 'DELETE_LEAD_FAILURE';
 
 export function deleteLeadFromServer(leadId) {
   return axios
-    .delete('http://localhost:8000/leads/' + leadId)
+    .delete('http://localhost:8000/leads/' + leadId + '/')
 }
 
 export function deleteLead(payload) {
@@ -68,14 +68,14 @@ export function deleteLeadFailure(error) {
 
 
 // get lead
-export const FETCH_LEAD = 'FETCH_LEAD';
-export const FETCH_LEAD_SUCCESS = 'FETCH_LEAD_SUCCESS';
-export const FETCH_LEAD_FAILURE = 'FETCH_LEAD_FAILURE';
+export const FETCH_LEAD = 'FETCH_LEAD'
+export const FETCH_LEAD_SUCCESS = 'FETCH_LEAD_SUCCESS'
+export const FETCH_LEAD_FAILURE = 'FETCH_LEAD_FAILURE'
 
 export function fetchLeadFromServer(leadId) {
-  console.log('leadId', leadId)
+
   return axios
-    .get('http://localhost:8000/leads/' + leadId)
+    .get('http://localhost:8000/leads/' + leadId + '/')
 }
 
 export function fetchLead(payload) {
@@ -85,14 +85,14 @@ export function fetchLead(payload) {
   }
 }
 
-export function fetchLeadSuccess(leads) {
+export function fetchLeadSuccess(lead) {
   return {
     type: FETCH_LEAD_SUCCESS,
     payload: lead
   }
 }
 
-export function fetchLeadsFailure(error) {
+export function fetchLeadFailure(error) {
   return {
     type: FETCH_LEAD_FAILURE,
     payload: error
