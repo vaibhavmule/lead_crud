@@ -19,6 +19,37 @@ class CreateLead extends Component {
     }
   }
 
+  renderNursing() {
+    return (
+
+      <div>
+        <br />
+        <p>No of hours</p>
+        <select>
+          <option value="12">12 hours</option>
+          <option value="24">24 hours</option>
+        </select>
+      </div>
+    )
+  }
+
+  renderEquipment() {
+
+    return (
+      <div>
+        <br />
+        <p>Deposit</p>
+        <input type="text" ref="deposit"/>
+        <br />
+        <p>Rent or Purchase</p>
+        <select>
+          <option value="1">Rent</option>
+          <option value="2">Purchase</option>
+        </select>
+      </div>
+    )
+  }
+
   render() {
     const { createLead } = this.props
 
@@ -26,7 +57,7 @@ class CreateLead extends Component {
       <div className="container">
         {this.renderError(createLead)}
         <h2>Create Lead</h2>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <p>Name</p>
           <input type="text" ref="name"/>
           <br />
@@ -38,29 +69,16 @@ class CreateLead extends Component {
           <br />
           <p>City</p>
           <select>
+            <option>------</option>
             <option value="1">Mumbai</option>
             <option value="2">Delhi</option>
           </select>
           <br />
           <p>Services</p>
           <select>
+            <option>------</option>
             <option value="1">Nursing</option>
             <option value="2">Equipment</option>
-          </select>
-          <br />
-          <p>No of hours</p>
-          <select>
-            <option value="12">12 hours</option>
-            <option value="24">24 hours</option>
-          </select>
-          <br />
-          <p>Deposit</p>
-          <input type="text" ref="deposit"/>
-          <br />
-          <p>Rent or Purchase</p>
-          <select>
-            <option value="1">Rent</option>
-            <option value="2">Purchase</option>
           </select>
         </form>
         <br />

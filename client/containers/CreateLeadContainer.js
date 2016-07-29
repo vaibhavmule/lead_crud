@@ -10,18 +10,18 @@ import {
 import CreateLead from '../components/CreateLead';
 
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
 
   return {
     createLead: state.leads.createLead
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    createLead: (id) => { 
+    createLead: (props) => {
 
-      dispatch(createLead(createLeadFromServer(id)
+      dispatch(createLead(createLeadFromServer(props)
         .then((res) => {
 
           dispatch(createLeadSuccess(res))
