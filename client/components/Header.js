@@ -15,7 +15,11 @@ class Header extends Component {
           <br/>
           <br/>
         </Link>
-    	<button>Add Lead</button>
+        <Link to={"/createLead"}>
+          <button>Add Lead</button>
+        </Link>
+
+    	
       </div>
    )
   }

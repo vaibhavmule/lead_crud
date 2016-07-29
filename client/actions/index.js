@@ -98,3 +98,36 @@ export function fetchLeadFailure(error) {
     payload: error
   }
 }
+
+
+//create lead
+export const CREATE_LEAD = 'CREATE_LEAD'
+export const CREATE_LEAD_SUCCESS = 'CREATE_LEAD_SUCCESS'
+export const CREATE_LEAD_FAILURE = 'CREATE_LEAD_FAILURE'
+
+export function createLeadFromServer(props) {
+
+  return axios  
+    .post('http://localhost:8000/leads/', props)
+}
+
+export function createLead(payload) {
+  return {
+    type: CREATE_LEAD,
+    payload
+  }
+}
+
+export function createLeadSuccess(lead) {
+  return {
+    type: CREATE_LEAD_SUCCESS,
+    payload: lead
+  }
+}
+
+export function createLeadFailure(error) {
+  return {
+    type: CREATE_LEAD_FAILURE,
+    payload: error
+  }
+}

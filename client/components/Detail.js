@@ -27,7 +27,6 @@ class Detail extends Component {
         <h2>Lead Detail</h2>
         <h3>{lead.name}</h3>
         <p>{lead.email} || {lead.phone} || {lead.no_of_hours} hours</p>
-        <button onClick={()=> {this.props.onDeleteClick()}}>Delete</button>
       </div>
     )
   }

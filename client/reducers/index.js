@@ -1,5 +1,10 @@
 import { combineReducers } from 'redux'
 import {
+  // get lead item
+  CREATE_LEAD,
+  CREATE_LEAD_FAILURE,
+  CREATE_LEAD_SUCCESS,
+
   // get leads list
   FETCH_LEADS,
   FETCH_LEADS_FAILURE,
@@ -24,6 +29,7 @@ const INITIAL_STATE = {
     loading: false
   },
   activeLead: { lead: null, error: null, loading: false },
+  createLead: { lead: null, error: null, loading: false },
   deletedPost: { lead: null, error: null, loading: false }
 }
 
@@ -39,6 +45,15 @@ function leads(state = INITIAL_STATE, action) {
     case FETCH_LEADS_FAILURE:
       error = action.payload.data || { message: action.payload.message }
       return {...state, leadsList: { leads: [], error: error, loading: false } }
+
+      // create lead
+    case CREATE_LEAD:
+      return {...state, createLead: {...state.createLead, loading: true } }
+    case CREATE_LEAD_SUCCESS:
+      return {...state, createLead: { lead: action.payload.data, error: null, loading: false } }
+    case CREATE_LEAD_FAILURE:
+      error = action.payload.data || { message: action.payload.message }
+      return {...state, createLead: { lead: null, error: error, loading: false } }
 
       // get lead item
     case FETCH_LEAD:

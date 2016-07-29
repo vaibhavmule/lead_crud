@@ -7,10 +7,10 @@ import {
   fetchLeadFromServer,
 
   // Fetch Lead
-  deleteLead,
-  deleteLeadSuccess,
-  deleteLeadFailure,
-  deleteLeadFromServer,
+  // deleteLead,
+  // deleteLeadSuccess,
+  // deleteLeadFailure,
+  // deleteLeadFromServer,
 } from '../actions'
 
 import LeadDetail from '../components/Detail';
@@ -42,21 +42,21 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         })))
 
     },
-    deleteLead: () => {
+    // deleteLead: () => {
 
-      dispatch(deleteLead(deleteLeadFromServer(ownProps.id)
-        .then((res) => {
+    //   dispatch(deleteLead(deleteLeadFromServer(ownProps.id)
+    //     .then((res) => {
 
-          dispatch(deleteLeadSuccess(res))
-          return res
-        })
-        .catch((err) => {
+    //       dispatch(deleteLeadSuccess(res))
+    //       return res
+    //     })
+    //     .catch((err) => {
 
-          dispatch(deleteLeadFailure(err))
-          return err
-        })))
+    //       dispatch(deleteLeadFailure(err))
+    //       return err
+    //     })))
 
-    }
+    // }
   }
 }
 
