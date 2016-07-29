@@ -9,7 +9,7 @@ export const FETCH_LEADS_FAILURE = 'FETCH_LEADS_FAILURE';
 
 export function fetchLeadsFromServer() {
   return axios
-    .get('http://localhost:8000/leads/')
+    .get('http://localhost:8001/leads/')
 }
 
 export function fetchLeads(payload) {
@@ -41,7 +41,7 @@ export const DELETE_LEAD_FAILURE = 'DELETE_LEAD_FAILURE';
 
 export function deleteLeadFromServer(leadId) {
   return axios
-    .delete('http://localhost:8000/leads/' + leadId + '/')
+    .delete('http://localhost:8001/leads/' + leadId + '/')
 }
 
 export function deleteLead(payload) {
@@ -75,7 +75,7 @@ export const FETCH_LEAD_FAILURE = 'FETCH_LEAD_FAILURE'
 export function fetchLeadFromServer(leadId) {
 
   return axios
-    .get('http://localhost:8000/leads/' + leadId + '/')
+    .get('http://localhost:8001/leads/' + leadId + '/')
 }
 
 export function fetchLead(payload) {
@@ -104,11 +104,12 @@ export function fetchLeadFailure(error) {
 export const CREATE_LEAD = 'CREATE_LEAD'
 export const CREATE_LEAD_SUCCESS = 'CREATE_LEAD_SUCCESS'
 export const CREATE_LEAD_FAILURE = 'CREATE_LEAD_FAILURE'
+export const RESET_CREATE_LEAD = 'RESET_CREATE_LEAD';
 
 export function createLeadFromServer(props) {
 
   return axios  
-    .post('http://localhost:8000/leads/', props)
+    .post('http://localhost:8001/leads/', props)
 }
 
 export function createLead(payload) {
@@ -129,5 +130,11 @@ export function createLeadFailure(error) {
   return {
     type: CREATE_LEAD_FAILURE,
     payload: error
+  }
+}
+
+export function resetCreateLead() {
+  return {
+    type: RESET_CREATE_LEAD
   }
 }

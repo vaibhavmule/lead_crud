@@ -4,6 +4,7 @@ import {
   CREATE_LEAD,
   CREATE_LEAD_FAILURE,
   CREATE_LEAD_SUCCESS,
+  RESET_CREATE_LEAD,
 
   // get leads list
   FETCH_LEADS,
@@ -20,6 +21,7 @@ import {
   DELETE_LEAD_FAILURE,
   DELETE_LEAD_SUCCESS
 } from '../actions'
+import { reducer as formReducer } from 'redux-form'
 
 // Initial state
 const INITIAL_STATE = {
@@ -54,6 +56,8 @@ function leads(state = INITIAL_STATE, action) {
     case CREATE_LEAD_FAILURE:
       error = action.payload.data || { message: action.payload.message }
       return {...state, createLead: { lead: null, error: error, loading: false } }
+    case RESET_CREATE_LEAD:
+      return {...state,  createLead: { lead: null, error: null, loading: false }}
 
       // get lead item
     case FETCH_LEAD:
@@ -82,6 +86,7 @@ function leads(state = INITIAL_STATE, action) {
 
 const rootReducer = combineReducers({
   leads,
+  form: formReducer
 })
 
 export default rootReducer

@@ -11,15 +11,13 @@ class Header extends Component {
       <div>
      	<h1>Lead Manager</h1>
      	  <Link to={"/"}>
-          <span>Home</span>
+          <button className="btn btn-danger">Home</button>
           <br/>
           <br/>
         </Link>
         <Link to={"/createLead"}>
-          <button>Add Lead</button>
+          <button className="btn btn-primary">Add Lead</button>
         </Link>
-
-    	
       </div>
    )
   }
