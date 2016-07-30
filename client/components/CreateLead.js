@@ -74,18 +74,17 @@ class CreateLead extends Component {
           {this.props.fields.rent_or_purchase.touched ? this.props.fields.rent_or_purchase : ''}
         </div>
       </div>
-
       </div>
     )
   }
 
   render() {
-    const {fields: { 
+    const {asyncValidating, fields: {
       name, email, phone, city, services, 
       no_of_hours, deposits, rent_or_purchase
     }, handleSubmit, submitting, createLead, createLeadState } = this.props
 
-    console.log(this.createLeadState)
+    console.log('createLeadState', this.createLeadState, asyncValidating)
 
     return (
       <div className="container">
@@ -100,6 +99,9 @@ class CreateLead extends Component {
           <div className="help-block">
             {name.touched ? name.error : ''}
           </div>
+        <div className="help-block">
+            {asyncValidating === 'name'? 'validating..': ''}
+          </div>
         </div>
 
         <div className={`form-group ${email.touched && email.invalid ? 'has-error' : ''}`}>
@@ -107,6 +109,9 @@ class CreateLead extends Component {
           <input type="email" className="form-control" {...email} />
           <div className="help-block">
             {email.touched ? email.error : ''}
+          </div>
+          <div className="help-block">
+            {asyncValidating === 'email' ? 'validating..': ''}
           </div>
         </div>
 

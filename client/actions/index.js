@@ -138,3 +138,42 @@ export function resetCreateLead() {
     type: RESET_CREATE_LEAD
   }
 }
+
+//Validate leads fields
+export const VALIDATE_LEAD_FIELDS = 'VALIDATE_LEAD_FIELDS'
+export const VALIDATE_LEAD_FIELDS_SUCCESS = 'VALIDATE_LEAD_FIELDS_SUCCESS'
+export const VALIDATE_LEAD_FIELDS_FAILURE = 'VALIDATE_LEAD_FIELDS_FAILURE'
+export const RESET_LEAD_FIELDS = 'RESET_LEAD_FIELDS'
+
+export function validateLeadFromServer(props) {
+
+  return axios  
+    .post('http://localhost:8001/leads/', props)
+}
+
+export function validateLeadFields(payload) {
+
+  return {
+    type: VALIDATE_LEAD_FIELDS,
+    payload
+  }
+}
+
+export function validateLeadFieldsSuccess() {
+  return {
+    type: VALIDATE_LEAD_FIELDS_SUCCESS
+  }
+}
+
+export function validateLeadFieldsFailure(error) {
+  return {
+    type: VALIDATE_LEAD_FIELDS_FAILURE,
+    payload: error
+  }
+}
+
+export function resetLeadFields() {
+  return {
+    type: RESET_LEAD_FIELDS
+  }
+}

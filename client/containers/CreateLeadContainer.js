@@ -6,6 +6,13 @@ import {
   createLeadFailure,
   resetCreateLead,
   createLeadFromServer,
+
+  // validate Lead fields
+  validateLead,
+  validateLeadSuccess,
+  validateLeadFailure,
+  resetLeadFields,
+  validateLeadFromServer,
 } from '../actions'
 import {
   reduxForm
@@ -15,7 +22,7 @@ from 'redux-form'
 // utils
 function val(field, fieldName) {
   if (!field || field.trim() === '') {
-    return 'Enter a ' + fieldName
+    return 'Required'
   }
 }
 
@@ -23,22 +30,65 @@ function val(field, fieldName) {
 function validate(values) {
   const errors = {}
 
-  errors.name = val(values.name, 'Name')
-  errors.phone = val(values.phone, 'Phone')
-  errors.email = val(values.email, 'Email')
-  errors.city = val(values.city, 'City')
-  errors.services = val(values.services, 'Services')
+  errors.name = val(values.name)
+  errors.phone = val(values.phone)
+  errors.email = val(values.email)
+  errors.city = val(values.city)
+  errors.services = val(values.services)
 
   if (values.services == 1) {
-    errors.no_of_hours = val(values.no_of_hours, 'No of hours')
+    errors.no_of_hours = val(values.no_of_hours)
   }
-  
+
   if (values.services == 2) {
-    errors.deposits = val(values.deposits, 'Deposits')
-    errors.rent_or_purchase = val(values.rent_or_purchase, 'Rent or Purchase')
+    errors.deposits = val(values.deposits)
+    errors.rent_or_purchase = val(values.rent_or_purchase)
   }
+
   return errors
 }
+
+// //For instant async server validation
+// const asyncValidate = (values, dispatch) => {
+//   return new Promise((resolve, reject) => {
+//     dispatch(validateLeadFields(validateLead(values)))
+//       .then((response) => {
+//         console.log('res', response)
+//         let data = response.payload.data
+//         let status = response.payload.status
+//         console.log('res', data)
+
+//         if (status != 200 || data.name || data.email) {
+
+//           dispatch(validateLeadSuccess(response.payload))
+//           reject(data)
+//         } else {
+//           dispatch(validateLeadFailure(response.payload))
+//           resolve()
+//         }
+//       })
+//   })
+// }
+
+const asyncValidate = (values, dispatch) => {
+
+  return new Promise((resolve, reject) => {
+    console.log('val', values)
+    dispatch(validateLeadFields(values))
+      .then((response) => {
+        let data = response.payload.data
+        console.log('res', data)
+        if (response.payload.status != 200 || data.name || data.email) {
+          dispatch(validateLeadFieldsFailure(response.payload))
+          reject(data)
+        } else {
+          dispatch(validateLeadFieldsSuccess(response.payload))
+          resolve()
+        }
+      })
+  })
+}
+
 
 const mapStateToProps = (state) => {
 
@@ -73,5 +123,7 @@ const mapDispatchToProps = (dispatch) => {
 export default reduxForm({
   form: 'CreateLead',
   fields: ['name', 'email', 'phone', 'city', 'services', 'no_of_hours', 'deposits', 'rent_or_purchase'],
+  asyncValidate,
+  asyncBlurFields: ['name', 'email'],
   validate
 }, mapStateToProps, mapDispatchToProps)(CreateLead)
