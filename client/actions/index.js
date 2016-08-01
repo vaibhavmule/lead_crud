@@ -146,7 +146,7 @@ export const VALIDATE_LEAD_FIELDS_FAILURE = 'VALIDATE_LEAD_FIELDS_FAILURE'
 export const RESET_LEAD_FIELDS = 'RESET_LEAD_FIELDS'
 
 export function validateLeadFromServer(props) {
-
+  console.log('props', props)
   return axios  
     .post('http://localhost:8001/leads/', props)
 }

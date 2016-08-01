@@ -48,46 +48,43 @@ function validate(values) {
   return errors
 }
 
-// //For instant async server validation
+
 // const asyncValidate = (values, dispatch) => {
+
 //   return new Promise((resolve, reject) => {
-//     dispatch(validateLeadFields(validateLead(values)))
-//       .then((response) => {
-//         console.log('res', response)
+//     console.log('val', values)
+
+//     validateLeadFromServer(values)
+//       .then((res) => {
 //         let data = response.payload.data
-//         let status = response.payload.status
-//         console.log('res', data)
-
-//         if (status != 200 || data.name || data.email) {
-
-//           dispatch(validateLeadSuccess(response.payload))
+//         console.log('res', data, response)
+//         if (response.payload.status != 200 || data.name || data.email) {
+//           dispatch(validateLeadFieldsFailure(response.payload))
 //           reject(data)
 //         } else {
-//           dispatch(validateLeadFailure(response.payload))
+//           dispatch(validateLeadFieldsSuccess(response.payload))
 //           resolve()
 //         }
-//       })
+//         return res
+//       })  
+
+//     // dispatch(validateLeadFields(validateLeadFromServer(values)
+//     //   .then((response) => {
+
+//     //     let data = response.payload.data
+//     //     console.log('res', data, response)
+//     //     if (response.payload.status != 200 || data.name || data.email) {
+//     //       dispatch(validateLeadFieldsFailure(response.payload))
+//     //       reject(data)
+//     //     } else {
+//     //       dispatch(validateLeadFieldsSuccess(response.payload))
+//     //       resolve()
+//     //     }
+//     //     return response
+//     //   })))
+
 //   })
 // }
-
-const asyncValidate = (values, dispatch) => {
-
-  return new Promise((resolve, reject) => {
-    console.log('val', values)
-    dispatch(validateLeadFields(values))
-      .then((response) => {
-        let data = response.payload.data
-        console.log('res', data)
-        if (response.payload.status != 200 || data.name || data.email) {
-          dispatch(validateLeadFieldsFailure(response.payload))
-          reject(data)
-        } else {
-          dispatch(validateLeadFieldsSuccess(response.payload))
-          resolve()
-        }
-      })
-  })
-}
 
 
 const mapStateToProps = (state) => {
@@ -123,7 +120,7 @@ const mapDispatchToProps = (dispatch) => {
 export default reduxForm({
   form: 'CreateLead',
   fields: ['name', 'email', 'phone', 'city', 'services', 'no_of_hours', 'deposits', 'rent_or_purchase'],
-  asyncValidate,
-  asyncBlurFields: ['name', 'email'],
+  // asyncValidate,
+  // asyncBlurFields: ['name', 'email'],
   validate
 }, mapStateToProps, mapDispatchToProps)(CreateLead)
